@@ -69,7 +69,8 @@ io.on('connection', socket => {
             io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) })
     })
 })
-
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 //serve static assets in production
 if (process.env.NODE_ENV === 'production') {
     //set static folder
@@ -100,8 +101,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 
 
-app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
+
 
 
 server.listen(PORT, () => {
