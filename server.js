@@ -13,7 +13,7 @@ const authRoute = require("./routes/Auth");
 const userRoute = require("./routes/User");
 app.use(express.json());
 const multer = require("multer");
-
+app.use(cors())
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
 const path = require('path')
 
@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer(app)
 const io = socketio(server)
 
-app.use(cors())
+
 app.use("/images", express.static(path.join(__dirname, "/images")));
 io.on('connection', socket => {
     socket.on('join', (payload, callback) => {
